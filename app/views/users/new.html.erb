@@ -1,0 +1,37 @@
+<h1>Signup!</h1>
+
+<%= form_for :user, url: '/users' do |f| %>
+  <ul class="no-bullets">
+    <li>
+      First Name:
+    </li>
+    <li>
+      <%= f.text_field :first_name %>
+    </li>
+    <li>
+      Last Name:
+    </li>
+    <li>
+      <%= f.text_field :last_name %>
+    </li>
+    <li>
+      Email:
+    </li>
+    <li>
+    <%= f.text_field :email %>
+    </li>
+    <li>
+      Password:
+    </li>
+    <li>
+    <%= f.password_field :password %>
+    </li>
+    <li>
+      Password Confirmation:
+    </li>
+    <li>
+    <%= f.password_field :password_confirmation %>
+    </li>
+    </ul>
+    <%= f.submit 'Sign up', class: 'button' %>
+<% end %>

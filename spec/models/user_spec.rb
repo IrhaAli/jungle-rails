@@ -31,7 +31,7 @@ RSpec.describe User, type: :model do
       subject.email = nil
       expect(subject).to_not be_valid
     end
-    it 'email must be case-insensitive' do
+    it 'email must be case-insensitive for signup' do
       another_user = User.new(
         first_name: 'first_name',
         last_name: 'last_name',

@@ -5,7 +5,7 @@ RSpec.describe User, type: :model do
     User.new(
       first_name: 'first_name',
       last_name: 'last_name',
-      email: 'email@gmail.com',
+      email: 'Email@gmail.com',
       password: '12345678',
       password_confirmation: '12345678'
     )
@@ -32,14 +32,15 @@ RSpec.describe User, type: :model do
       expect(subject).to_not be_valid
     end
     it 'email must be case-insensitive for signup' do
-      another_user = User.new(
+      User.create(
         first_name: 'first_name',
         last_name: 'last_name',
         email: 'EMAIL@gmail.com',
         password: '12345678',
         password_confirmation: '12345678'
       )
-      expect(another_user).to_not be_valid
+      subject.save
+      expect(subject).to_not be_valid
     end
     it 'password must have minimum length' do
       subject.password = '123'
@@ -49,14 +50,17 @@ RSpec.describe User, type: :model do
   end
 
   describe '.authenticate_with_credentials' do
+    before do
+      subject.save
+    end
     it 'password matches' do
-      expect(User.authenticate_with_credentials('email@gmail.com', '12345678')).to be true
+      expect(User.authenticate_with_credentials('email@gmail.com', '12345678')).to eq subject
     end
     it 'email field with whitespace still valid login' do
-      expect(User.authenticate_with_credentials('  email@gmail.com  ', '12345678')).to be true
+      expect(User.authenticate_with_credentials('  email@gmail.com  ', '12345678')).to eq subject
     end
     it 'email verification is case-insensitive' do
-      expect(User.authenticate_with_credentials('EMAIL@gmail.com', '12345678')).to be true
+      expect(User.authenticate_with_credentials('EMAIL@gmail.com', '12345678')).to eq subject
     end
   end
 end

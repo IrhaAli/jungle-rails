@@ -1,10 +1,8 @@
 describe('Product Page Tests', () => {
-  it("Navigate from homepage to product page by clicking on product", () => {
+  it("Add item to cart and increase cart items by 1", () => {
     cy.visit('/')
-    // cy.get("article")
-    // .first()
-    // .contains("Add")
-    // .click()
-    cy.contains("My Cart")
+    cy.get(':nth-child(1) > div > .button_to > .btn')
+    .click()
+    // cy.contains("My Cart")
   });
 })
